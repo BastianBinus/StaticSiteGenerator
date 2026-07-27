@@ -32,6 +32,7 @@ glob("**/*.@(md|ejs|html)", { cwd: `${srcPath}/pages` })
           const templateConfig = Object.assign({}, config, {
             page: PageData.attributes,
           });
+          const layout = PageData.attributes.layout || "default";
 
           let pageContent;
 
@@ -45,11 +46,11 @@ glob("**/*.@(md|ejs|html)", { cwd: `${srcPath}/pages` })
             default:
               pageContent = PageData.body;
           }
-          return { pageContent, templateConfig };
+          return { pageContent, templateConfig, layout };
         })
-        .then(({ pageContent, templateConfig }) => {
+        .then(({ pageContent, templateConfig, layout }) => {
           return ejsRenderFile(
-            `${srcPath}/layout.ejs`,
+            `${srcPath}/layouts/${layout}.ejs`,
             Object.assign({}, config, templateConfig, { body: pageContent }),
             ejsOptions,
           );
@@ -64,5 +65,5 @@ glob("**/*.@(md|ejs|html)", { cwd: `${srcPath}/pages` })
     });
   })
   .catch((err) => {
-    console.err(err);
+    console.error(err);
   });
