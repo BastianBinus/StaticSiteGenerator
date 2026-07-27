@@ -2,8 +2,11 @@ const fse = require("fs-extra");
 const path = require("path");
 const { promisify } = require("util");
 const { glob } = require("glob");
+const frontMatter = require("front-matter");
+const ejs = require("ejs");
 const ejsRenderFile = promisify(require("ejs").renderFile);
 const config = require("../site.config.js");
+const { marked } = require("marked");
 
 const srcPath = "./src";
 const DistPath = "./public";
@@ -20,15 +23,32 @@ glob("**/*.@(md|ejs|html)", { cwd: `${srcPath}/pages` })
       fse
         .mkdirs(destPath)
         .then(() => {
-          return ejsRenderFile(
-            `${srcPath}/pages/${file}`,
-            Object.assign({}, config),
-          );
+          return fse.readFile(`${srcPath}/pages/${file}`, "utf-8");
         })
-        .then((pageContents) => {
+        .then((data) => {
+          const PageData = frontMatter(data);
+          const templateConfig = Object.assign({}, config, {
+            page: PageData.attributes,
+          });
+
+          let pageContent;
+
+          switch (fileData.ext) {
+            case ".md":
+              pageContent = marked(PageData.body);
+              break;
+            case ".ejs":
+              pageContent = ejs.render(PageData.body, templateConfig);
+              break;
+            default:
+              pageContent = PageData.body;
+          }
+          return { pageContent, templateConfig };
+        })
+        .then(({ pageContent, templateConfig }) => {
           return ejsRenderFile(
             `${srcPath}/layout.ejs`,
-            Object.assign({}, config, { body: pageContents }),
+            Object.assign({}, config, templateConfig, { body: pageContent }),
           );
         })
 
