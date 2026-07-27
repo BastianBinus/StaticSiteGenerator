@@ -11,7 +11,7 @@ const DistPath = "./public";
 fse.emptyDirSync(`${DistPath}`);
 fse.copy(`${srcPath}/assets`, `${DistPath}/assets`);
 
-glob("**/*.ejs", { cwd: `${srcPath}/pages` })
+glob("**/*.@(md|ejs|html)", { cwd: `${srcPath}/pages` })
   .then((files) => {
     files.forEach((file) => {
       const fileData = path.parse(file);
