@@ -10,6 +10,8 @@ const { marked } = require("marked");
 
 const srcPath = "./src";
 const DistPath = "./public";
+const partialsPath = path.join(srcPath, "partials");
+const ejsOptions = { views: [srcPath, partialsPath] };
 
 fse.emptyDirSync(`${DistPath}`);
 fse.copy(`${srcPath}/assets`, `${DistPath}/assets`);
@@ -49,6 +51,7 @@ glob("**/*.@(md|ejs|html)", { cwd: `${srcPath}/pages` })
           return ejsRenderFile(
             `${srcPath}/layout.ejs`,
             Object.assign({}, config, templateConfig, { body: pageContent }),
+            ejsOptions,
           );
         })
 
