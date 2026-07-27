@@ -1,4 +1,4 @@
-const projects = require("src/data/config/projects");
+const projects = require("./src/data/config/projects");
 
 module.exports = {
   site: {

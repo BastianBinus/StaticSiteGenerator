@@ -1,8 +1,8 @@
 const fse = require("fs-extra");
 const path = require("path");
 const { promisify } = require("util");
+const { glob } = require("glob");
 const ejsRenderFile = promisify(require("ejs").renderFile);
-const globP = promisify(require("glob"));
 const config = require("../site.config.js");
 
 const srcPath = "./src";
@@ -11,7 +11,7 @@ const DistPath = "./public";
 fse.emptyDirSync(`${DistPath}`);
 fse.copy(`${srcPath}/assets`, `${DistPath}/assets`);
 
-globP("**/*.ejs", { cwd: `${srcPath}/pages` })
+glob("**/*.ejs", { cwd: `${srcPath}/pages` })
   .then((files) => {
     files.forEach((file) => {
       const fileData = path.parse(file);
@@ -27,13 +27,13 @@ globP("**/*.ejs", { cwd: `${srcPath}/pages` })
         })
         .then((pageContents) => {
           return ejsRenderFile(
-            "${srcPath}/pages/${file}",
-            Object.assign({}, config),
+            `${srcPath}/layout.ejs`,
+            Object.assign({}, config, { body: pageContents }),
           );
         })
 
         .then((layoutContent) => {
-          fse.writeFile("${destPath}/${fileData.name}.html", layoutContent);
+          fse.writeFile(`${destPath}/${fileData.name}.html`, layoutContent);
         })
         .catch((err) => {
           console.error(err);
