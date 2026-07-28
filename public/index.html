@@ -6,7 +6,7 @@
     <title>
         Static Site Generator
     </title>
-    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="/assets/style.css">
 </head>
 
 <body>
@@ -26,7 +26,32 @@
         </a>
         
 </nav>
-            <h1>Über die Seite</h1>
+            <h1>Static Site Generator</h1>
+<p>Das ist ein ganz einfacher, selbstgebauter Static Site Generator mit Node.js.
+Er nimmt Markdown- und EJS-Dateien aus <code>src/pages</code>, packt sie in ein Layout
+und schreibt am Ende fertige HTML-Seiten nach <code>public/</code>.</p>
+<h2>Wie funktioniert&#39;s?</h2>
+<ol>
+<li><code>scripts/build.js</code> durchsucht <code>src/pages</code> nach <code>.md</code>, <code>.ejs</code> und <code>.html</code> Dateien.</li>
+<li>Jede Datei kann oben ein <strong>Front Matter</strong> haben (<code>title</code>, <code>layout</code>, ...).</li>
+<li>Markdown wird mit <code>marked</code> zu HTML gerendert, <code>.ejs</code> direkt mit EJS ausgeführt.</li>
+<li>Der fertige Inhalt wird in ein Layout aus <code>src/layouts</code> eingesetzt (Header + Nav via Partials).</li>
+<li>Raus kommt eine fertige <code>.html</code> Datei in <code>public/</code>.</li>
+</ol>
+<h2>Tech-Stack</h2>
+<ul>
+<li><strong>ejs</strong> – Templating für Layouts und Partials</li>
+<li><strong>marked</strong> – Markdown zu HTML</li>
+<li><strong>front-matter</strong> – Metadaten (Titel, Layout, ...) am Dateianfang</li>
+<li><strong>fs-extra</strong> &amp; <strong>glob</strong> – Dateien finden, kopieren, schreiben</li>
+</ul>
+<h2>Scripts</h2>
+<ul>
+<li><code>npm run build</code> – baut die Seite einmalig nach <code>public/</code></li>
+<li><code>npm run watch:build</code> – baut automatisch neu bei Änderungen</li>
+<li><code>npm run watch:serve</code> – startet einen lokalen Server für <code>public/</code></li>
+<li><code>npm run dev</code> – beides gleichzeitig</li>
+</ul>
 <h2>Projekt Tree</h2>
 <pre><code>root/
 ├── package.json
