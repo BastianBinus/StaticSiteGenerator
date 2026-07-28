@@ -1,11 +1,20 @@
+:root {
+  --accent: #3457d5;
+  --accent-light: #eef1fd;
+  --text: #1a1a1a;
+  --muted: #5b6472;
+  --border: #e2e5ea;
+  --code-bg: #f4f6fb;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
-  color: #222;
+  font-family: "Inter", system-ui, sans-serif;
+  color: var(--text);
   background: #fff;
   line-height: 1.5;
 }
@@ -29,19 +38,32 @@ header h1 {
 
 header p {
   margin-top: 0;
-  color: #555;
+  color: var(--muted);
+}
+
+h1,
+h2,
+h3 {
+  color: var(--accent);
+}
+
+h2 {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.3rem;
 }
 
 nav {
   display: flex;
   gap: 1rem;
   padding: 1rem;
-  border-bottom: 1px solid #ddd;
+  background: var(--accent-light);
+  border-bottom: 2px solid var(--accent);
   margin-bottom: 1.5rem;
 }
 
 nav a {
-  color: #06c;
+  color: var(--accent);
+  font-weight: 600;
   text-decoration: none;
 }
 
@@ -50,18 +72,21 @@ nav a:hover {
 }
 
 a {
-  color: #06c;
+  color: var(--accent);
 }
 
 code {
-  background: #f2f2f2;
+  font-family: "JetBrains Mono", monospace;
+  background: var(--code-bg);
   padding: 0.15em 0.35em;
   border-radius: 3px;
-  font-size: 0.9em;
+  font-size: 0.85em;
 }
 
 pre {
-  background: #f2f2f2;
+  font-family: "JetBrains Mono", monospace;
+  background: var(--code-bg);
+  border-left: 4px solid var(--accent);
   padding: 1rem;
   border-radius: 5px;
   overflow-x: auto;
@@ -72,17 +97,23 @@ pre code {
   padding: 0;
 }
 
+pre code.hljs {
+  background: transparent;
+}
+
 button {
   font: inherit;
   padding: 0.4em 0.8em;
-  border: 1px solid #ccc;
+  border: 1px solid var(--accent);
   border-radius: 4px;
-  background: #f7f7f7;
+  background: var(--accent-light);
+  color: var(--accent);
   cursor: pointer;
 }
 
 button:hover {
-  background: #eee;
+  background: var(--accent);
+  color: #fff;
 }
 
 .hidden {
