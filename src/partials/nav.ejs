@@ -1,0 +1,8 @@
+<nav>
+    <a href="/">Home</a>
+    <% site.projects.forEach(function(project) { %>
+        <a href="/<%= project.slug %>.html">
+            <%= project.title %>
+        </a>
+        <% }) %>
+</nav>

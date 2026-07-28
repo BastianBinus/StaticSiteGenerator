@@ -6,6 +6,7 @@
     <title>
         Static Site Generator
     </title>
+    <link rel="stylesheet" href="../assets/style.css">
 </head>
 
 <body>
@@ -17,12 +18,47 @@
         A simple static site generator built with Node.js
     </p>
 </header>
-        <h1>Hallo Welt</h1>
-<p>Das ist ein <strong>Test</strong> für den Markdown-Pfad mit <code>marked</code> und Front Matter.</p>
+        <nav>
+    <a href="/">Home</a>
+    
+        <a href="/process.html">
+            Prozess
+        </a>
+        
+</nav>
+            <h1>Über die Seite</h1>
+<h2>Projekt Tree</h2>
+<pre><code>root/
+├── package.json
+├── site.config.js
+├── public/
+│   ├── index.html
+│   └── assets/
+├── scripts/
+│   └── build.js
+└── src/
+    ├── assets/
+    ├── data/
+    │   └── config/
+    │       └── projects.js
+    ├── layouts/
+    │   ├── default.ejs
+    │   └── minimal.ejs
+    ├── pages/
+    │   └── index.md
+    └── partials/
+        └── header.ejs
+</code></pre>
+<h2>Filearten</h2>
+<p>Das ist eine <strong>Beispielseite</strong> für den Markdown Seiten Generator mit <code>marked</code> und Front Matter.</p>
+<p>Das erstellen von Seiten funktinoiert mit:</p>
 <ul>
-<li>Punkt 1</li>
-<li>Punkt 2</li>
+<li><strong>Markdown</strong></li>
+<li><strong>Embedded JavaScript</strong></li>
+<li><strong>HTML</strong></li>
 </ul>
+<h2>Feste Web-Assets</h2>
+<p>Feste Dateien wie JavaScript oder CSS wird in Assets abgelegt und bei der generierung direkt weitergeleitet</p>
 
 </body>
 

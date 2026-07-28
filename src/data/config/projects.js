@@ -1,2 +1,2 @@
 // src/data/config/projects.js
-module.exports = [];
+module.exports = [{ slug: "process", title: "Prozess" }];

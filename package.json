@@ -1,8 +1,10 @@
 {
   "scripts": {
-    "build": "node ./scripts/build",
-    "serve": "serve ./public"
-  },
+  "build": "node ./scripts/build",
+  "watch:build": "nodemon --watch src --ext js,mjs,cjs,json,ejs,md --delay 1 --exec \"npm run build\"",
+  "watch:serve": "browser-sync start --server public --files public --no-open --watch-options.usePolling --watch-options.interval 300",
+  "dev": "concurrently \"npm:watch:build\" \"npm:watch:serve\""
+},
   "dependencies": {
     "ejs": "^6.0.1",
     "front-matter": "^4.0.2",
@@ -10,5 +12,14 @@
     "glob": "^13.0.6",
     "marked": "^18.0.7",
     "serve": "^14.2.6"
-  }
+  },
+  "devDependencies": {
+    "browser-sync": "^3.0.4",
+    "concurrently": "^10.0.4",
+    "nodemon": "^3.1.14"
+  },
+  "overrides": {
+  "brace-expansion": "^5.0.8",
+  "immutable": "^5"
+}
 }
